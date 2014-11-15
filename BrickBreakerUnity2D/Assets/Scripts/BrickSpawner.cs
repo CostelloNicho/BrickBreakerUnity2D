@@ -1,52 +1,47 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿// Copyright 2014 Nicholas Costello <NicholasJCostello@gmail.com>
+
 using System.Collections.Generic;
 using Assets.Scripts.Managers;
+using UnityEngine;
 
-public class BrickSpawner : MonoBehaviour 
+public class BrickSpawner : MonoBehaviour
 {
-	public GameObject brick;
+    public List<GameObject> Bricks;
+    public Color[] Colors;
 
-	public List<GameObject> Bricks;
+    public float EdgeBufferZone = 1f;
+    public float SpawnOffset = 0.5f;
+    public GameObject Brick;
 
-	public float EdgeBufferZone = 1f;
-	public float SpawnOffset = 0.5f;
+    protected void Start()
+    {
+        Bricks = new List<GameObject>();
+        CreateBrickBlock(10, 10);
+    }
 
-	protected void Start()
-	{
-		Bricks = new List<GameObject>();
-		CreateBrickBlock(10,10);
-	}
+    protected void CreateBrickBlock(int rows, int columns)
+    {
 
-	protected void CreateBrickBlock(int rows, int columns)
-	{
-		//float x = Random.Range(0, ResolutionManager.HalfWidth - EdgeBufferZone);
-		//float y = Random.Range(0, ResolutionManager.HalfHeight - EdgeBufferZone);
+        for (var column = 0; column < columns; column++)
+        {
+            for (var row = 0; row < rows; row++)
+            {
+                var xMax = ResolutionManager.HalfWidth - EdgeBufferZone;
+                var yMax = ResolutionManager.HalfHeight - EdgeBufferZone;
+                var x = ((row + 1f)/rows)*(xMax*2f);
+                var y = ((column + 1f)/columns)*yMax;
+                var brickColor = Colors[Random.Range(0, Colors.Length)];
+                var brickPosition = new Vector2(x - ResolutionManager.HalfWidth, y);
+                SpawnBrick(brickPosition.ToVector3(), brickColor);
+                Bricks.Add(Brick);
+            }
+        }
+    }
 
-		for(int column = 0; column < columns; column++)
-		{
-			for(int row = 0; row < rows; row++)
-			{
-				Vector2 brickPosition;
-				float xMax = ResolutionManager.HalfWidth - EdgeBufferZone;
-				float yMax = ResolutionManager.HalfHeight - EdgeBufferZone;
-
-				float x = ((row+1f)/rows) * (xMax * 2f);
-				float y = ((column+1f)/columns) * yMax;
-
-				brickPosition = new Vector2(x - ResolutionManager.HalfWidth,y);
-				SpawnBrick(brickPosition.ToVector3());
-	
-				Bricks.Add(brick);
-			}
-		}
-
-	}
-	
-	protected void SpawnBrick(Vector3 position)
-	{
-		var go = Instantiate(brick, position, Quaternion.identity)as GameObject;
-		Bricks.Add(go);
-	}
-
+    protected void SpawnBrick(Vector3 position, Color color)
+    {
+        var go = Instantiate(Brick, position, Quaternion.identity) as GameObject;
+        go.GetComponent<SpriteRenderer>().color = color;
+        Bricks.Add(go);
+    }
 }

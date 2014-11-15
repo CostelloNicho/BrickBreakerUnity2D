@@ -203,7 +203,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .316176474, g: .316176474, b: .316176474, a: .0196078438}
+  m_BackGroundColor: {r: .492647052, g: .492647052, b: .492647052, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -279,7 +279,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 0
-  m_FixedAngle: 0
+  m_FixedAngle: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -356,10 +356,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e8a13af059374dbe84df10cff3ce527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  brick: {fileID: 100000, guid: 3660e6297a9a14b1fa78c4f81b262ea6, type: 2}
   Bricks: []
+  Colors:
+  - {r: .0862745121, g: .20784314, b: .447058827, a: 1}
+  - {r: .141176477, g: .411764711, b: .647058845, a: 1}
+  - {r: .454901963, g: .745098054, b: .662745118, a: 1}
+  - {r: .945098042, g: .721568644, b: .529411793, a: 1}
+  - {r: .945098042, g: .533333361, b: .388235301, a: 1}
   EdgeBufferZone: 1
   SpawnOffset: .5
+  Brick: {fileID: 100000, guid: 3660e6297a9a14b1fa78c4f81b262ea6, type: 2}
 --- !u!4 &2007335451
 Transform:
   m_ObjectHideFlags: 0
