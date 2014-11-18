@@ -7,7 +7,6 @@ using UnityEngine;
 public class BrickSpawner : MonoBehaviour
 {
     public GameObject Brick;
-    public Transform BrickContrainer;
     public List<GameObject> Bricks;
     public Color[] Colors;
 
@@ -42,7 +41,7 @@ public class BrickSpawner : MonoBehaviour
     {
         var go = Instantiate(Brick, position, Quaternion.identity) as GameObject;
         if (go == null) return;
-        go.transform.parent = BrickContrainer;
+        go.transform.parent = transform;
         go.GetComponent<SpriteRenderer>().color = color;
         Bricks.Add(go);
     }

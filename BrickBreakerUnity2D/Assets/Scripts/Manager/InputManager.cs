@@ -49,10 +49,10 @@ namespace Assets.Scripts.Managers
 			else 
 				CurrentInputDirection = Direction.None;
 
-			Player.Instance.Move(CurrentInputDirection);
+			GamePlayManager.Instance.Move(CurrentInputDirection);
 
 			if(shoot)
-				Player.Instance.ReleaseBall();
+				GamePlayManager.Instance.ReleaseBall();
 
         }
 

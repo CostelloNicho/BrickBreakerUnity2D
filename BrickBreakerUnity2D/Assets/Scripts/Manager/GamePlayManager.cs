@@ -2,21 +2,21 @@
 using System.Collections;
 using Assets.Scripts.Managers;
 
-public class Player : Singleton<Player>
+public class GamePlayManager : Singleton<GamePlayManager>
 {
-
-    public GameObject Ball;
+	public Transform Block;
+    public Transform Ball;
 
 	private bool _isBallHeld;
 	private const int Speed = 6;
 	private Vector2 origin;
-	// Use this for initialization
+
 	protected void Start ()
 	{
 	    _isBallHeld = false;
 		origin.x = 0f;
 		origin.y = -ResolutionManager.HalfHeight;
-		transform.position = origin.ToVector3();
+		Block.position = origin.ToVector3();
         HoldBall();
 	}
 	
@@ -36,7 +36,7 @@ public class Player : Singleton<Player>
 			break;
 		}
 
-		rigidbody2D.velocity = velocity;
+		Block.rigidbody2D.velocity = velocity;
 	}
 
     public void HitBall(Vector3 velocity)
@@ -56,19 +56,11 @@ public class Player : Singleton<Player>
 	{
 		_isBallHeld = true;
 	    Ball.GetComponent<Rigidbody2D>().isKinematic = true;
-	    Ball.transform.parent = transform;
-	    Vector3 pos = transform.position;
+	    Ball.transform.parent = Block;
+	    Vector3 pos = Block.position;
 	    pos.y += 1;
 	    Ball.transform.position = pos;
 
 	}
-
-    /// <summary>
-    /// Handle a collisions between the ball and the Pad
-    /// </summary>
-    /// <param name="other"></param>
-    public void OnTriggerEnter2D (Collider2D other)
-    {
-        if (other.tag != Ball.tag) return;
-    }
+	
 }
