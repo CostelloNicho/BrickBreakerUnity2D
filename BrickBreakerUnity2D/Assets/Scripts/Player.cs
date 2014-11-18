@@ -2,17 +2,22 @@
 using System.Collections;
 using Assets.Scripts.Managers;
 
-public class Player : Singleton<Player> 
+public class Player : Singleton<Player>
 {
-	private bool isBallHeld;
+
+    public GameObject Ball;
+
+	private bool _isBallHeld;
 	private const int Speed = 6;
 	private Vector2 origin;
 	// Use this for initialization
-	void Start () 
+	protected void Start ()
 	{
+	    _isBallHeld = false;
 		origin.x = 0f;
 		origin.y = -ResolutionManager.HalfHeight;
 		transform.position = origin.ToVector3();
+        HoldBall();
 	}
 	
 	public void Move(Direction direction)
@@ -34,15 +39,36 @@ public class Player : Singleton<Player>
 		rigidbody2D.velocity = velocity;
 	}
 
+    public void HitBall(Vector3 velocity)
+    {
+        Ball.GetComponent<Rigidbody2D>().velocity = velocity;
+    }
+
 	public void ReleaseBall()
 	{
-		isBallHeld = false;
-		//Fire the ball and begin
+		_isBallHeld = false;
+        Ball.GetComponent<Rigidbody2D>().isKinematic = false;
+	    Ball.transform.parent = null;
+	    //Fire the ball and begin
 	}
 
 	public void HoldBall()
 	{
-		isBallHeld = true;
-		//
+		_isBallHeld = true;
+	    Ball.GetComponent<Rigidbody2D>().isKinematic = true;
+	    Ball.transform.parent = transform;
+	    Vector3 pos = transform.position;
+	    pos.y += 1;
+	    Ball.transform.position = pos;
+
 	}
+
+    /// <summary>
+    /// Handle a collisions between the ball and the Pad
+    /// </summary>
+    /// <param name="other"></param>
+    public void OnTriggerEnter2D (Collider2D other)
+    {
+        if (other.tag != Ball.tag) return;
+    }
 }
