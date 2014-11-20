@@ -265,8 +265,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a9ab946be2594503aa66ef289785ae2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Pad: {fileID: 0}
-  Ball: {fileID: 1579897551}
+  Block: {fileID: 1631560942}
+  Ball: {fileID: 1579897555}
 --- !u!4 &590740131
 Transform:
   m_ObjectHideFlags: 0
@@ -338,6 +338,7 @@ GameObject:
   - 212: {fileID: 1579897554}
   - 58: {fileID: 1579897553}
   - 50: {fileID: 1579897552}
+  - 114: {fileID: 1579897556}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Ball
@@ -369,7 +370,7 @@ CircleCollider2D:
   m_PrefabInternal: {fileID: 2075003233}
   m_GameObject: {fileID: 1579897551}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 7916f35f595e06d4094c242f408ba782, type: 2}
   m_IsTrigger: 0
   m_Radius: .0799999982
   m_Center: {x: 0, y: 0}
@@ -408,6 +409,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!114 &1579897556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1579897551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da10b267287ed4a99a695522570bcb2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1631560938
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,6 +589,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5800000, guid: b472ea89c31a7a745b24348a0bd21856, type: 2}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 7916f35f595e06d4094c242f408ba782, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b472ea89c31a7a745b24348a0bd21856, type: 2}
   m_RootGameObject: {fileID: 1579897551}

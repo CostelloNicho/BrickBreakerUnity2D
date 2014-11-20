@@ -47,15 +47,16 @@ public class GamePlayManager : Singleton<GamePlayManager>
 	public void ReleaseBall()
 	{
 		_isBallHeld = false;
-        Ball.GetComponent<Rigidbody2D>().isKinematic = false;
+        Ball.rigidbody2D.isKinematic = false;
 	    Ball.transform.parent = null;
 	    //Fire the ball and begin
+		HitBall(Block.up * 5);
 	}
 
 	public void HoldBall()
 	{
 		_isBallHeld = true;
-	    Ball.GetComponent<Rigidbody2D>().isKinematic = true;
+		Ball.rigidbody2D.isKinematic = true;
 	    Ball.transform.parent = Block;
 	    Vector3 pos = Block.position;
 	    pos.y += 1;
