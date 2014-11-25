@@ -9,14 +9,14 @@ namespace Assets.Scripts.Managers
         //Touch Variables
         private const float MinSwipeTime = 0.06f;
         private const float MaxSwipeTime = 1.0f;
-        public Direction CurrentInputDirection;
+        private Direction _currentInputDirection;
         private Vector2 _touchEnd;
         private Vector2 _touchStart;
         private float _touchTime;
 
         protected void Start()
         {
-            CurrentInputDirection = Direction.Right;
+            _currentInputDirection = Direction.None;
         }
 
         /// <summary>
@@ -38,22 +38,19 @@ namespace Assets.Scripts.Managers
         /// </summary>
         protected void PollKeyboardInput()
         {
-            bool right = Input.GetKey(KeyCode.RightArrow);
-            bool left = Input.GetKey(KeyCode.LeftArrow);
-			bool shoot = Input.GetKeyUp(KeyCode.Space);
+            var right = Input.GetKey(KeyCode.RightArrow);
+            var left = Input.GetKey(KeyCode.LeftArrow);
+            var shoot = Input.GetKeyUp(KeyCode.Space);
 
             if (right)
-                CurrentInputDirection = Direction.Right;
-            else if (left )
-                CurrentInputDirection = Direction.Left;
-			else 
-				CurrentInputDirection = Direction.None;
+                Messenger<Direction>.Broadcast(BrickBreakerEvents.DirectionInputEvent, Direction.Right);
+            else if (left)
+                Messenger<Direction>.Broadcast(BrickBreakerEvents.DirectionInputEvent, Direction.Left);
+            else
+                Messenger<Direction>.Broadcast(BrickBreakerEvents.DirectionInputEvent, Direction.None);
 
-			GamePlayManager.Instance.Move(CurrentInputDirection);
-
-			if(shoot)
-				GamePlayManager.Instance.ReleaseBall();
-
+            if (shoot)
+                Messenger.Broadcast(BrickBreakerEvents.FireInputEvent);
         }
 
         /// <summary>
@@ -66,7 +63,7 @@ namespace Assets.Scripts.Managers
             if (Input.touchCount > 0)
             {
                 //only grab the first touch as we are not dealing with multitouch
-                Touch touch = Input.touches[0];
+                var touch = Input.touches[0];
 
                 switch (touch.phase)
                 {
@@ -111,7 +108,7 @@ namespace Assets.Scripts.Managers
         /// </summary>
         private void HandleInputEnded()
         {
-            Direction dir = CurrentInputDirection;
+            var dir = _currentInputDirection;
 
             if (CheckForSwipe()) // if it is a swipe
             {
@@ -127,7 +124,6 @@ namespace Assets.Scripts.Managers
                     dir = Mathf.Sign(_touchEnd.y - _touchStart.y) > 0 ? Direction.Up : Direction.Down;
                 }
             }
-
         }
 
         /// <summary>
