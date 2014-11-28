@@ -6,7 +6,9 @@ TagManager:
   - Border
   - Brick
   - Ball
-  - Pad
+  - Block
+  - 
+  - border
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

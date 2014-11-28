@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class GamePlayManager : Singleton<GamePlayManager>
 {
-    private const int Speed = 6;
+    private const int Speed = 10;
     public Transform Ball;
     public Transform Block;
 
