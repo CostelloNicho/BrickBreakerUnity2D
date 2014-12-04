@@ -785,8 +785,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da10b267287ed4a99a695522570bcb2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minMagnitude: 7
   maxMagnitude: 12
+  minMagnitude: 7
 --- !u!1 &1631560938
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,7 +800,7 @@ GameObject:
   - 212: {fileID: 1631560941}
   m_Layer: 0
   m_Name: Block
-  m_TagString: Untagged
+  m_TagString: Block
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
